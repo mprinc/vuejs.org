@@ -22,7 +22,7 @@ Vue.component('button-counter', {
 })
 ```
 
-Components are reusable Vue instances with a name: in this case, `<button-counter>`. We can use this component as a custom element inside a root Vue instance created with `new Vue`:
+<span class='definition'>Components are reusable Vue instances</span> with a name: in this case, `<button-counter>`. We can use this component as a custom element inside a root Vue instance created with `new Vue`:
 
 ```html
 <div id="components-demo">
@@ -88,7 +88,7 @@ data: {
 }
 ```
 
-Instead, **a component's `data` option must be a function**, so that each instance can maintain an independent copy of the returned data object:
+<span class='important'>Instead, **a component's `data` option must be a function**, so that each instance can maintain an independent copy of the returned data object</span>:
 
 ```js
 data: function () {
@@ -128,7 +128,7 @@ It's common for an app to be organized into a tree of nested components:
 
 For example, you might have components for a header, sidebar, and content area, each typically containing other components for navigation links, blog posts, etc.
 
-To use these components in templates, they must be registered so that Vue knows about them. There are two types of component registration: **global** and **local**. So far, we've only registered components globally, using `Vue.component`:
+To use these components in templates, <span class='important'>they must be registered so that Vue knows about them</span>. There are two types of <span class='definition'>component registration</span>: **global** and **local**. So far, we've only registered components globally, using `Vue.component`:
 
 ```js
 Vue.component('my-component-name', {
@@ -136,7 +136,7 @@ Vue.component('my-component-name', {
 })
 ```
 
-Globally registered components can be used in the template of any root Vue instance (`new Vue`) created afterwards -- and even inside all subcomponents of that Vue instance's component tree.
+<span class='definition'>Globally registered</span> components can be used in the template of any root Vue instance (`new Vue`) created afterwards -- and even inside all subcomponents of that Vue instance's component tree.
 
 That's all you need to know about registration for now, but once you've finished reading this page and feel comfortable with its content, we recommend coming back later to read the full guide on [Component Registration](components-registration.html).
 
@@ -144,7 +144,7 @@ That's all you need to know about registration for now, but once you've finished
 
 Earlier, we mentioned creating a component for blog posts. The problem is, that component won't be useful unless you can pass data to it, such as the title and content of the specific post we want to display. That's where props come in.
 
-Props are custom attributes you can register on a component. When a value is passed to a prop attribute, it becomes a property on that component instance. To pass a title to our blog post component, we can include it in the list of props this component accepts, using a `props` option:
+<span class='definition'>Props</span> are custom attributes you can register on a component. When a value is passed to a prop attribute, it becomes a property on that component instance. To pass a title to our blog post component, we can include it in the list of props this component accepts, using a `props` option:
 
 ```js
 Vue.component('blog-post', {
@@ -155,7 +155,7 @@ Vue.component('blog-post', {
 
 A component can have as many props as you'd like and by default, any value can be passed to any prop. In the template above, you'll see that we can access this value on the component instance, just like with `data`.
 
-Once a prop is registered, you can pass data to it as a custom attribute, like this:
+Once a prop is registered, you can <span class='definition'>pass data to it as a custom attribute</span>, like this:
 
 ```html
 <blog-post title="My journey with Vue"></blog-post>
@@ -222,7 +222,7 @@ At the very least, you'll want to include the post's content:
 <div v-html="content"></div>
 ```
 
-If you try this in your template however, Vue will show an error, explaining that **every component must have a single root element**. You can fix this error by wrapping the template in a parent element, such as:
+If you try this in your template however, Vue will show <span class='important'>an error, explaining that **every component must have a single root element**</span>. You can fix this error by wrapping the template in a parent element, such as:
 
 ```html
 <div class="blog-post">
@@ -244,7 +244,7 @@ As our component grows, it's likely we'll not only need the title and content of
 ></blog-post>
 ```
 
-So this might be a good time to refactor the `<blog-post>` component to accept a single `post` prop instead:
+So this might be a good time to refactor the `<blog-post>` component to accept a single `post` <span class='definition'>prop</span> instead:
 
 ```html
 <blog-post
@@ -266,7 +266,7 @@ Vue.component('blog-post', {
 })
 ```
 
-<p class="tip">The above example and some future ones use JavaScript's [template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) to make multi-line templates more readable. These are not supported by Internet Explorer (IE), so if you must support IE and are not transpiling (e.g. with Babel or TypeScript), use [newline escapes](https://css-tricks.com/snippets/javascript/multiline-string-variables-in-javascript/) instead.</p>
+<p class="tip">The above example and some future ones use JavaScript's [template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) to make <span class='definition'>multi-line</span> templates more readable. These are not supported by Internet Explorer (IE), so if you must support IE and are not transpiling (e.g. with Babel or TypeScript), use [newline escapes](https://css-tricks.com/snippets/javascript/multiline-string-variables-in-javascript/) instead.</p>
 
 Now, whenever a new property is added to `post` objects, it will automatically be available inside `<blog-post>`.
 
@@ -325,7 +325,7 @@ The problem is, this button doesn't do anything:
 </button>
 ```
 
-When we click on the button, we need to communicate to the parent that it should enlarge the text of all posts. Fortunately, Vue instances provide a custom events system to solve this problem. The parent can choose to listen to any event on the child component instance with `v-on`, just as we would with a native DOM event:
+When we click on the button, <span class='important'>we need to communicate to the parent</span> that it should enlarge the text of all posts. Fortunately, Vue instances provide a <span class='definition'>custom events system</span> to solve this problem. The parent can choose to listen to any event on the child component instance with <span class='definition'>`v-on`</span>, just as we would with a native DOM event:
 
 ```html
 <blog-post
@@ -334,7 +334,7 @@ When we click on the button, we need to communicate to the parent that it should
 ></blog-post>
 ```
 
-Then the child component can emit an event on itself by calling the built-in [**`$emit`** method](../api/#vm-emit), passing the name of the event:
+Then the child component can <span class='definition'>emit an event</span> on itself by calling the built-in [**`$emit`** method](../api/#vm-emit), passing the name of the event:
 
 ```html
 <button v-on:click="$emit('enlarge-text')">
@@ -384,7 +384,7 @@ new Vue({
 
 ### Emitting a Value With an Event
 
-It's sometimes useful to emit a specific value with an event. For example, we may want the `<blog-post>` component to be in charge of how much to enlarge the text by. In those cases, we can use `$emit`'s 2nd parameter to provide this value:
+It's sometimes useful to <span class='definition'>emit a specific value with an event</span>. For example, we may want the `<blog-post>` component to be in charge of how much to enlarge the text by. In those cases, we can use `$emit`'s 2nd parameter to provide this value:
 
 ```html
 <button v-on:click="$emit('enlarge-text', 0.1)">
@@ -392,7 +392,7 @@ It's sometimes useful to emit a specific value with an event. For example, we ma
 </button>
 ```
 
-Then when we listen to the event in the parent, we can access the emitted event's value with `$event`:
+Then when we listen to the event in the parent, we can <span class='definition'>access the emitted event's value</span> with `$event`:
 
 ```html
 <blog-post
@@ -401,7 +401,7 @@ Then when we listen to the event in the parent, we can access the emitted event'
 ></blog-post>
 ```
 
-Or, if the event handler is a method:
+Or, if the <span class='definition'>event handler is a method</span>:
 
 ```html
 <blog-post
@@ -428,7 +428,7 @@ Custom events can also be used to create custom inputs that work with `v-model`.
 <input v-model="searchText">
 ```
 
-does the same thing as:
+does <span class='important'>the same thing as</span>:
 
 ```html
 <input
@@ -446,10 +446,10 @@ When used on a component, `v-model` instead does this:
 ></custom-input>
 ```
 
-For this to actually work though, the `<input>` inside the component must:
+For this to actually work though, <span class='important'>the `<input>` inside the component must</span>:
 
-- Bind the `value` attribute to a `value` prop
-- On `input`, emit its own custom `input` event with the new value
+- <span class='important'>Bind</span> the `value` attribute to a `value` prop
+- On `input`, <span class='important'>emit</span> its own custom `input` event with the new value
 
 Here's that in action:
 
@@ -475,7 +475,7 @@ That's all you need to know about custom component events for now, but once you'
 
 ## Content Distribution with Slots
 
-Just like with HTML elements, it's often useful to be able to pass content to a component, like this:
+Just like with HTML elements, it's often useful to be able to <span class='definition'>pass content to a component</span>, like this:
 
 ``` html
 <alert-box>
@@ -511,7 +511,7 @@ new Vue({ el: '#slots-demo' })
 </style>
 {% endraw %}
 
-Fortunately, this task is made very simple by Vue's custom `<slot>` element:
+Fortunately, this task is made very simple by Vue's custom <span class='definition'>`<slot>` element</span>:
 
 ```js
 Vue.component('alert-box', {
@@ -524,13 +524,13 @@ Vue.component('alert-box', {
 })
 ```
 
-As you'll see above, we just add the slot where we want it to go -- and that's it. We're done!
+As you'll see above, we just <span class='important'>add the slot where we want it to go</span> -- and that's it. We're done!
 
 That's all you need to know about slots for now, but once you've finished reading this page and feel comfortable with its content, we recommend coming back later to read the full guide on [Slots](components-slots.html).
 
 ## Dynamic Components
 
-Sometimes, it's useful to dynamically switch between components, like in a tabbed interface:
+Sometimes, it's useful to <span class='definition'>dynamically switch between components</span>, like in a tabbed interface:
 
 {% raw %}
 <div id="dynamic-component-demo" class="demo">
@@ -589,7 +589,7 @@ new Vue({
 </style>
 {% endraw %}
 
-The above is made possible by Vue's `<component>` element with the `is` special attribute:
+The above is made possible by Vue's <span class='definition'>`<component>` element</span> with the `is` special attribute:
 
 ```html
 <!-- Component changes when currentTabComponent changes -->
@@ -598,8 +598,8 @@ The above is made possible by Vue's `<component>` element with the `is` special 
 
 In the example above, `currentTabComponent` can contain either:
 
-- the name of a registered component, or
-- a component's options object
+- the <span class='definition'>name of a registered component</span>, or
+- a <span class='definition'>component's options object</span>
 
 See [this example](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-dynamic-components) to experiment with the full code, or [this version](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-dynamic-components-with-binding) for an example binding to a component's options object, instead of its registered name.
 
@@ -609,7 +609,7 @@ That's all you need to know about dynamic components for now, but once you've fi
 
 ## DOM Template Parsing Caveats
 
-Some HTML elements, such as `<ul>`, `<ol>`, `<table>` and `<select>` have restrictions on what elements can appear inside them, and some elements such as `<li>`, `<tr>`, and `<option>` can only appear inside certain other elements.
+Some HTML elements, such as `<ul>`, `<ol>`, `<table>` and `<select>` have <span class='important'>restrictions on what elements can appear inside them</span>, and some elements such as `<li>`, `<tr>`, and `<option>` <span class='important'>can only appear inside certain other elements</span>.
 
 This will lead to issues when using components with elements that have such restrictions. For example:
 
@@ -619,7 +619,7 @@ This will lead to issues when using components with elements that have such rest
 </table>
 ```
 
-The custom component `<blog-post-row>` will be hoisted out as invalid content, causing errors in the eventual rendered output. Fortunately, the `is` special attribute offers a workaround:
+The custom component `<blog-post-row>` will be <span class='definition'>hoisted out as invalid content</span>, causing <span class='important'>errors in the eventual rendered output</span>. Fortunately, the <span class='definition'>`is` special attribute</span> offers a workaround:
 
 ``` html
 <table>

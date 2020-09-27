@@ -6,11 +6,11 @@ order: 104
 
 > This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
 
-> In 2.6.0, we introduced a new unified syntax (the `v-slot` directive) for named and scoped slots. It replaces the `slot` and `slot-scope` attributes, which are now deprecated, but have _not_ been removed and are still documented [here](#Deprecated-Syntax). The rationale for introducing the new syntax is described in this [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md).
+> In 2.6.0, we introduced a new unified syntax (the `v-slot` directive) for <span class='definition'>named</span> and <span class='definition'>scoped slots</span>. It replaces the `slot` and `slot-scope` attributes, which are now deprecated, but have _not_ been removed and are still documented [here](#Deprecated-Syntax). The rationale for introducing the new syntax is described in this [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md).
 
 ## Slot Content
 
-Vue implements a content distribution API inspired by the [Web Components spec draft](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md), using the `<slot>` element to serve as distribution outlets for content.
+Vue implements a ., inspired by the [Web Components spec draft](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md), using the `<slot>` element to serve as distribution outlets for content.
 
 This allows you to compose components like this:
 
@@ -31,7 +31,7 @@ Then in the template for `<navigation-link>`, you might have:
 </a>
 ```
 
-When the component renders, `<slot></slot>` will be replaced by "Your Profile". Slots can contain any template code, including HTML:
+<span class='important'>When the component renders, `<slot></slot>` will be replaced by "Your Profile"</span>. <span class='important'>Slots can contain any template code, including HTML</span>:
 
 ``` html
 <navigation-link url="/profile">
@@ -41,7 +41,7 @@ When the component renders, `<slot></slot>` will be replaced by "Your Profile". 
 </navigation-link>
 ```
 
-Or even other components:
+Or even <span class='definition'>other components</span>:
 
 ``` html
 <navigation-link url="/profile">
@@ -51,7 +51,7 @@ Or even other components:
 </navigation-link>
 ```
 
-If `<navigation-link>`'s template did **not** contain a `<slot>` element, any content provided between its opening and closing tag would be discarded.
+<span class='important'>If `<navigation-link>`'s template did **not** contain a `<slot>` element, any content provided between its opening and closing tag would be discarded</span>.
 
 ## Compilation Scope
 
@@ -63,7 +63,7 @@ When you want to use data inside a slot, such as in:
 </navigation-link>
 ```
 
-That slot has access to the same instance properties (i.e. the same "scope") as the rest of the template. The slot does **not** have access to `<navigation-link>`'s scope. For example, trying to access `url` would not work:
+That slot has access to the same instance properties (i.e. the <span class='important'>same "scope"</span>) as the rest of the template. <span class='important'>The slot does **not** have access to `<navigation-link>`'s scope</span>. For example, trying to access `url` would not work:
 
 ``` html
 <navigation-link url="/profile">
@@ -82,7 +82,7 @@ As a rule, remember that:
 
 ## Fallback Content
 
-There are cases when it's useful to specify fallback (i.e. default) content for a slot, to be rendered only when no content is provided. For example, in a `<submit-button>` component:
+There are cases when it's useful to specify <span class='definition'>fallback (i.e. default) content</span> for a slot, to be rendered only when no content is provided. For example, in a `<submit-button>` component:
 
 ```html
 <button type="submit">
@@ -90,7 +90,7 @@ There are cases when it's useful to specify fallback (i.e. default) content for 
 </button>
 ```
 
-We might want the text "Submit" to be rendered inside the `<button>` most of the time. To make "Submit" the fallback content, we can place it in between the `<slot>` tags:
+We might want the text "Submit" to be rendered inside the `<button>` most of the time. To make "Submit" the fallback content, we can place it <span class='important'>in between the `<slot>` tags</span>:
 
 ```html
 <button type="submit">
@@ -132,7 +132,7 @@ Then the provided content will be rendered instead:
 
 > Updated in 2.6.0+. [See here](#Deprecated-Syntax) for the deprecated syntax using the `slot` attribute.
 
-There are times when it's useful to have multiple slots. For example, in a `<base-layout>` component with the following template:
+There are times when it's useful to have <span class='definition'>multiple slots</span>. For example, in a `<base-layout>` component with the following template:
 
 ``` html
 <div class="container">
@@ -148,7 +148,7 @@ There are times when it's useful to have multiple slots. For example, in a `<bas
 </div>
 ```
 
-For these cases, the `<slot>` element has a special attribute, `name`, which can be used to define additional slots:
+For these cases, the `<slot>` element has a <span class='definition'>special attribute, `name`</span>, which can be used to define additional slots:
 
 ``` html
 <div class="container">
@@ -164,9 +164,9 @@ For these cases, the `<slot>` element has a special attribute, `name`, which can
 </div>
 ```
 
-A `<slot>` outlet without `name` implicitly has the name "default".
+A `<slot>` outlet <span class='important'>without `name` implicitly has the name "default"</span>.
 
-To provide content to named slots, we can use the `v-slot` directive on a `<template>`, providing the name of the slot as `v-slot`'s argument:
+To provide content to named slots, we can use the <span class='definition'>`v-slot` directive</span> on a `<template>`, providing the name of the slot as `v-slot`'s argument:
 
 ```html
 <base-layout>
@@ -183,7 +183,7 @@ To provide content to named slots, we can use the `v-slot` directive on a `<temp
 </base-layout>
 ```
 
-Now everything inside the `<template>` elements will be passed to the corresponding slots. Any content not wrapped in a `<template>` using `v-slot` is assumed to be for the default slot.
+Now everything inside the `<template>` elements will be passed to the corresponding slots. <span class='important'>Any content not wrapped in a `<template>` using `v-slot` is assumed to be for the default slot</span>.
 
 However, you can still wrap default slot content in a `<template>` if you wish to be explicit:
 
@@ -227,7 +227,7 @@ Note that **`v-slot` can only be added to a `<template>`** (with [one exception]
 
 > Updated in 2.6.0+. [See here](#Deprecated-Syntax) for the deprecated syntax using the `slot-scope` attribute.
 
-Sometimes, it's useful for slot content to have access to data only available in the child component. For example, imagine a `<current-user>` component with the following template:
+Sometimes, it's <span class='definition'>useful for slot content to have access to data only available in the child component</span>. For example, imagine a `<current-user>` component with the following template:
 
 ```html
 <span>
@@ -243,9 +243,9 @@ We might want to replace this fallback content to display the user's first name,
 </current-user>
 ```
 
-That won't work, however, because only the `<current-user>` component has access to the `user` and the content we're providing is rendered in the parent.
+That <span class='important'>won't work, however, because only the `<current-user>` component has access to the `user`</span> and <span class='definition'>the content we're providing is rendered in the parent</span>.
 
-To make `user` available to the slot content in the parent, we can bind `user` as an attribute to the `<slot>` element:
+To make `user` available to the slot content in the parent, we can <span class='definition'>bind `user` as an attribute to the `<slot>` element</span>:
 
 ``` html
 <span>
@@ -255,7 +255,7 @@ To make `user` available to the slot content in the parent, we can bind `user` a
 </span>
 ```
 
-Attributes bound to a `<slot>` element are called **slot props**. Now, in the parent scope, we can use `v-slot` with a value to define a name for the slot props we've been provided:
+Attributes bound to a `<slot>` element are called <span class='definition'>**slot props**</span>. Now, in the parent scope, we can use `v-slot` with a value to define a name for the slot props we've been provided:
 
 ``` html
 <current-user>
@@ -265,11 +265,11 @@ Attributes bound to a `<slot>` element are called **slot props**. Now, in the pa
 </current-user>
 ```
 
-In this example, we've chosen to name the object containing all our slot props `slotProps`, but you can use any name you like.
+In this example, we've chosen to <span class='definition'>name</span> the object containing all our slot props `slotProps`, but you can use any name you like.
 
 ### Abbreviated Syntax for Lone Default Slots
 
-In cases like above, when _only_ the default slot is provided content, the component's tags can be used as the slot's template. This allows us to use `v-slot` directly on the component:
+In cases like above, when _only_ the default slot is provided content, <span class='important'>the component's tags can be used as the slot's template</span>. This allows us to use `v-slot` directly on the component:
 
 ``` html
 <current-user v-slot:default="slotProps">
@@ -277,7 +277,7 @@ In cases like above, when _only_ the default slot is provided content, the compo
 </current-user>
 ```
 
-This can be shortened even further. Just as non-specified content is assumed to be for the default slot, `v-slot` without an argument is assumed to refer to the default slot:
+This can be shortened even further. Just as non-specified content is assumed to be for the default slot, <span class='definition'>`v-slot` without an argument is assumed to refer to the default slot</span>:
 
 ``` html
 <current-user v-slot="slotProps">
@@ -285,7 +285,7 @@ This can be shortened even further. Just as non-specified content is assumed to 
 </current-user>
 ```
 
-Note that the abbreviated syntax for default slot **cannot** be mixed with named slots, as it would lead to scope ambiguity:
+Note that the <span class='definition'>abbreviated syntax for default slot **cannot** be mixed with named slots</span>, as it would lead to scope ambiguity:
 
 ``` html
 <!-- INVALID, will result in warning -->
@@ -297,7 +297,7 @@ Note that the abbreviated syntax for default slot **cannot** be mixed with named
 </current-user>
 ```
 
-Whenever there are multiple slots, use the full `<template>` based syntax for _all_ slots:
+<span class='definition'>Whenever there are multiple slots, use the full `<template>` based syntax for _all_ slots</span>:
 
 ``` html
 <current-user>
@@ -329,7 +329,7 @@ That means the value of `v-slot` can actually accept any valid JavaScript expres
 </current-user>
 ```
 
-This can make the template much cleaner, especially when the slot provides many props. It also opens other possibilities, such as renaming props, e.g. `user` to `person`:
+This can make the template much cleaner, especially when the slot provides many props. It also opens other possibilities, such as <span class='definition'>renaming props</span>, e.g. `user` to `person`:
 
 ``` html
 <current-user v-slot="{ user: person }">
@@ -337,7 +337,7 @@ This can make the template much cleaner, especially when the slot provides many 
 </current-user>
 ```
 
-You can even define fallbacks, to be used in case a slot prop is undefined:
+You can even define <span class='definition'>fallbacks</span>, to be used in case a slot prop is undefined:
 
 ``` html
 <current-user v-slot="{ user = { firstName: 'Guest' } }">
@@ -349,7 +349,7 @@ You can even define fallbacks, to be used in case a slot prop is undefined:
 
 > New in 2.6.0+
 
-[Dynamic directive arguments](syntax.html#Dynamic-Arguments) also work on `v-slot`, allowing the definition of dynamic slot names:
+[Dynamic directive arguments](syntax.html#Dynamic-Arguments) also work on `v-slot`, allowing the definition of <span class='definition'>dynamic slot names</span>:
 
 ``` html
 <base-layout>
@@ -363,7 +363,7 @@ You can even define fallbacks, to be used in case a slot prop is undefined:
 
 > New in 2.6.0+
 
-Similar to `v-on` and `v-bind`, `v-slot` also has a shorthand, replacing everything before the argument (`v-slot:`) with the special symbol `#`. For example, `v-slot:header` can be rewritten as `#header`:
+Similar to `v-on` and `v-bind`, `v-slot` also has a shorthand, replacing everything before the argument (`v-slot:`) with the <span class='definition'>special symbol `#`</span>. For example, <span class='important'>`v-slot:header` can be rewritten as `#header`</span>:
 
 ```html
 <base-layout>
@@ -399,7 +399,7 @@ Instead, you must always specify the name of the slot if you wish to use the sho
 
 ## Other Examples
 
-**Slot props allow us to turn slots into reusable templates that can render different content based on input props.** This is most useful when you are designing a reusable component that encapsulates data logic while allowing the consuming parent component to customize part of its layout.
+**Slot props allow us to turn slots into reusable templates that can render different content based on input props.** This is most useful when you are designing a <span class='definition'>reusable component</span> that <span class='important'>encapsulates data logic while allowing the consuming parent component to customize part of its layout</span>.
 
 For example, we are implementing a `<todo-list>` component that contains the layout and filtering logic for a list:
 
@@ -414,7 +414,7 @@ For example, we are implementing a `<todo-list>` component that contains the lay
 </ul>
 ```
 
-Instead of hard-coding the content for each todo, we can let the parent component take control by making every todo a slot, then binding `todo` as a slot prop:
+<span class='important'>Instead of hard-coding the content for each todo, we can let the parent component take control by making every todo a slot, then binding `todo` as a slot prop</span>:
 
 ```html
 <ul>
@@ -434,7 +434,7 @@ Instead of hard-coding the content for each todo, we can let the parent componen
 </ul>
 ```
 
-Now when we use the `<todo-list>` component, we can optionally define an alternative `<template>` for todo items, but with access to data from the child:
+Now when we use the `<todo-list>` component, we can optionally define <span class='definition'>an alternative `<template>`</span> for todo items, but with access to data from the child:
 
 ```html
 <todo-list v-bind:todos="todos">

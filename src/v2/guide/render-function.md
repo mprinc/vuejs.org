@@ -6,9 +6,9 @@ order: 303
 
 ## Basics
 
-Vue recommends using templates to build your HTML in the vast majority of cases. There are situations however, where you really need the full programmatic power of JavaScript. That's where you can use the **render function**, a closer-to-the-compiler alternative to templates.
+Vue recommends using templates to build your HTML in the vast majority of cases. There are situations however, where you really need the full programmatic power of JavaScript. That's where you can use the <span class='definition'>**render function**</span>, a <span class='important'>closer-to-the-compiler alternative to templates</span>.
 
-Let's dive into a simple example where a `render` function would be practical. Say you want to generate anchored headings:
+Let's dive into a simple example where <span class='definition'>a `render` function would be practical</span>. Say you want to generate anchored headings:
 
 ``` html
 <h1>
@@ -61,9 +61,9 @@ Vue.component('anchored-heading', {
 })
 ```
 
-That template doesn't feel great. It's not only verbose, but we're duplicating `<slot></slot>` for every heading level and will have to do the same when we add the anchor element.
+<span class='important'>That template doesn't feel great</span>. It's not only verbose, but we're duplicating `<slot></slot>` for every heading level and will have to do the same when we add the anchor element.
 
-While templates work great for most components, it's clear that this isn't one of them. So let's try rewriting it with a `render` function:
+While templates work great for most components, it's clear that this isn't one of them. So let's try rewriting it with a <span class='definition'>`render` function</span>:
 
 ``` js
 Vue.component('anchored-heading', {
@@ -82,7 +82,7 @@ Vue.component('anchored-heading', {
 })
 ```
 
-Much simpler! Sort of. The code is shorter, but also requires greater familiarity with Vue instance properties. In this case, you have to know that when you pass children without a `v-slot` directive into a component, like the `Hello world!` inside of `anchored-heading`, those children are stored on the component instance at `$slots.default`. If you haven't already, **it's recommended to read through the [instance properties API](../api/#Instance-Properties) before diving into render functions.**
+Much simpler! Sort of. The code is shorter, but also requires greater familiarity with Vue instance properties. In this case, you have to know that <span class='important'>when you pass children without a `v-slot` directive into a component</span>, like the `Hello world!` inside of `anchored-heading`, <span class='important'>those children are stored on the component instance at `$slots.default`</span>. If you haven't already, **it's recommended to read through the [instance properties API](../api/#Instance-Properties) before diving into render functions.**
 
 ## Nodes, Trees, and the Virtual DOM
 
@@ -102,9 +102,9 @@ The tree of DOM nodes for the HTML above looks like this:
 
 ![DOM Tree Visualization](/images/dom-tree.png)
 
-Every element is a node. Every piece of text is a node. Even comments are nodes! A node is just a piece of the page. And as in a family tree, each node can have children (i.e. each piece can contain other pieces).
+<span class='definition'>Every element is a node</span>. <span class='important'>Every piece of text is a node</span>. <span class='important'>Even comments are nodes</span>! A node is just a piece of the page. And as in a family tree, each node can have children (i.e. each piece can contain other pieces).
 
-Updating all these nodes efficiently can be difficult, but thankfully, you never have to do it manually. Instead, you tell Vue what HTML you want on the page, in a template:
+<span class='italic'>Updating all these nodes efficiently can be difficult</span>, but thankfully, you never have to do it manually. Instead, you tell Vue what HTML you want on the page, in a template:
 
 ```html
 <h1>{{ blogTitle }}</h1>
@@ -118,21 +118,21 @@ render: function (createElement) {
 }
 ```
 
-And in both cases, Vue automatically keeps the page updated, even when `blogTitle` changes.
+And in both cases, <span class='definition'>Vue automatically keeps the page updated</span>, even when `blogTitle` changes.
 
 ### The Virtual DOM
 
-Vue accomplishes this by building a **virtual DOM** to keep track of the changes it needs to make to the real DOM. Taking a closer look at this line:
+Vue accomplishes this by building a <span class='definition'>**virtual DOM**</span> to <span class='important'>keep track of the changes it needs to make to the real DOM</span>. Taking a closer look at this line:
 
 ``` js
 return createElement('h1', this.blogTitle)
 ```
 
-What is `createElement` actually returning? It's not _exactly_ a real DOM element. It could perhaps more accurately be named `createNodeDescription`, as it contains information describing to Vue what kind of node it should render on the page, including descriptions of any child nodes. We call this node description a "virtual node", usually abbreviated to **VNode**. "Virtual DOM" is what we call the entire tree of VNodes, built by a tree of Vue components.
+<span class='definition'>What is `createElement` actually returning?</span> It's not _exactly_ a real DOM element. It could perhaps more accurately be named `createNodeDescription`, as it contains <span class='important'>information describing to Vue what kind of node it should render</span> on the page, including descriptions of any <span class='definition'>child nodes</span>. We call this node description a <span class='definition'>"virtual node"</span>, usually abbreviated to **VNode**. <span class='definition'>"Virtual DOM"</span> is what we call the entire tree of VNodes, built by a tree of Vue components.
 
 ## `createElement` Arguments
 
-The next thing you'll have to become familiar with is how to use template features in the `createElement` function. Here are the arguments that `createElement` accepts:
+The next thing you'll have to become familiar with is <span class='definition'>how to use template features in the `createElement` function</span>. Here are the arguments that `createElement` accepts:
 
 ``` js
 // @returns {VNode}
@@ -285,7 +285,7 @@ Vue.component('anchored-heading', {
 
 #### VNodes Must Be Unique
 
-All VNodes in the component tree must be unique. That means the following render function is invalid:
+<span class='important'>All VNodes in the component tree must be unique</span>. That means the following render function is <span class='important'>invalid</span>:
 
 ``` js
 render: function (createElement) {
@@ -297,7 +297,7 @@ render: function (createElement) {
 }
 ```
 
-If you really want to duplicate the same element/component many times, you can do so with a factory function. For example, the following render function is a perfectly valid way of rendering 20 identical paragraphs:
+If you really want to duplicate the same element/component many times, you can do so with a <span class='definition'>factory function</span>. For example, the following render function is a perfectly valid way of rendering 20 identical paragraphs:
 
 ``` js
 render: function (createElement) {
@@ -313,7 +313,7 @@ render: function (createElement) {
 
 ### `v-if` and `v-for`
 
-Wherever something can be easily accomplished in plain JavaScript, Vue render functions do not provide a proprietary alternative. For example, in a template using `v-if` and `v-for`:
+<span class='important'>Wherever something can be easily accomplished in plain JavaScript, Vue render functions do not provide a proprietary alternative</span>. For example, in a template using `v-if` and `v-for`:
 
 ``` html
 <ul v-if="items.length">
@@ -339,7 +339,7 @@ render: function (createElement) {
 
 ### `v-model`
 
-There is no direct `v-model` counterpart in render functions - you will have to implement the logic yourself:
+There is <span class='definition'>no direct `v-model` counterpart</span> in render functions - you will have to implement the logic yourself:
 
 ``` js
 props: ['value'],
@@ -481,7 +481,7 @@ Especially when the template version is so simple in comparison:
 </anchored-heading>
 ```
 
-That's why there's a [Babel plugin](https://github.com/vuejs/jsx) to use JSX with Vue, getting us back to a syntax that's closer to templates:
+That's why there's a <span class='definition'>[Babel plugin](https://github.com/vuejs/jsx) to use JSX with Vue</span>, getting us back to a syntax that's closer to templates:
 
 ``` js
 import AnchoredHeading from './AnchoredHeading.vue'
@@ -498,7 +498,7 @@ new Vue({
 })
 ```
 
-<p class="tip">Aliasing `createElement` to `h` is a common convention you'll see in the Vue ecosystem and is actually required for JSX. Starting with [version 3.4.0](https://github.com/vuejs/babel-plugin-transform-vue-jsx#h-auto-injection) of the Babel plugin for Vue, we automatically inject `const h = this.$createElement` in any method and getter (not functions or arrow functions), declared in ES2015 syntax that has JSX, so you can drop the `(h)` parameter. With prior versions of the plugin, your app would throw an error if `h` was not available in the scope.</p>
+<p class="tip"><span class='definition'>Aliasing `createElement` to `h`</span> is a common convention you'll see in the Vue ecosystem and is actually required for JSX. Starting with [version 3.4.0](https://github.com/vuejs/babel-plugin-transform-vue-jsx#h-auto-injection) of the Babel plugin for Vue, we automatically inject `const h = this.$createElement` in any method and getter (not functions or arrow functions), declared in ES2015 syntax that has JSX, so you can drop the `(h)` parameter. With prior versions of the plugin, your app would throw an error if `h` was not available in the scope.</p>
 
 For more on how JSX maps to JavaScript, see the [usage docs](https://github.com/vuejs/jsx#installation).
 
@@ -506,7 +506,7 @@ For more on how JSX maps to JavaScript, see the [usage docs](https://github.com/
 
 The anchored heading component we created earlier is relatively simple. It doesn't manage any state, watch any state passed to it, and it has no lifecycle methods. Really, it's only a function with some props.
 
-In cases like this, we can mark components as `functional`, which means that they're stateless (no [reactive data](../api/#Options-Data)) and instanceless (no `this` context). A **functional component** looks like this:
+In cases like this, we can mark components as <span class='definition'>`functional`</span>, which means that <span class='important'>they're stateless (no [reactive data](../api/#Options-Data)) and instanceless (no `this` context)</span>. A <span class='definition'>**functional component**</span> looks like this:
 
 ``` js
 Vue.component('my-component', {
@@ -523,11 +523,11 @@ Vue.component('my-component', {
 })
 ```
 
-> Note: in versions before 2.3.0, the `props` option is required if you wish to accept props in a functional component. In 2.3.0+ you can omit the `props` option and all attributes found on the component node will be implicitly extracted as props.
-> 
+> Note: in versions before 2.3.0, the `props` option is required if you wish to accept props in a functional component. In 2.3.0+ you can omit the `props` option and <span class='important'>all attributes found on the component node will be implicitly extracted as props</span>.
+>
 > The reference will be HTMLElement when used with functional components because they’re stateless and instanceless.
 
-In 2.5.0+, if you are using [single-file components](single-file-components.html), template-based functional components can be declared with:
+In 2.5.0+, <span class='important'>if you are using [single-file components](single-file-components.html)</span>, <span class='definition'>template-based functional components</span> can be declared with:
 
 ``` html
 <template functional>
@@ -547,12 +547,12 @@ Everything the component needs is passed through `context`, which is an object c
 
 After adding `functional: true`, updating the render function of our anchored heading component would require adding the `context` argument, updating `this.$slots.default` to `context.children`, then updating `this.level` to `context.props.level`.
 
-Since functional components are just functions, they're much cheaper to render.
+<span class='important'>Since functional components are just functions, they're much cheaper to render</span>.
 
-They're also very useful as wrapper components. For example, when you need to:
+They're also very useful as <span class='definition'>wrapper components</span>. For example, when you need to:
 
-- Programmatically choose one of several other components to delegate to
-- Manipulate children, props, or data before passing them on to a child component
+- <span class='definition'>Programmatically choose one of several other components to delegate</span> to
+- <span class='definition'>Manipulate children, props, or data before passing them on to a child component</span>
 
 Here's an example of a `smart-list` component that delegates to more specific components, depending on the props passed to it:
 

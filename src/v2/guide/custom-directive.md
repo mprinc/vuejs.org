@@ -39,7 +39,7 @@ Vue.directive('focus', {
 })
 ```
 
-If you want to register a directive locally instead, components also accept a `directives` option:
+If you want to <span class='definition'>register a directive locally</span> instead, components also accept a `directives` option:
 
 ``` js
 directives: {
@@ -60,13 +60,13 @@ Then in a template, you can use the new `v-focus` attribute on any element, like
 
 ## Hook Functions
 
-A directive definition object can provide several hook functions (all optional):
+A directive definition object can provide several <span class='definition'>hook</span> functions (all optional):
 
-- `bind`: called only once, when the directive is first bound to the element. This is where you can do one-time setup work.
+- `bind`: <span class='important'>called only once</span>, when the directive is <span class='definition'>first bound to the element</span>. This is where you can do one-time setup work.
 
-- `inserted`: called when the bound element has been inserted into its parent node (this only guarantees parent node presence, not necessarily in-document).
+- `inserted`: called when the bound element has been <span class='definition'>inserted into its parent node</span> (this only guarantees parent node presence, not necessarily in-document).
 
-- `update`: called after the containing component's VNode has updated, __but possibly before its children have updated__. The directive's value may or may not have changed, but you can skip unnecessary updates by comparing the binding's current and old values (see below on hook arguments).
+- `update`: called after the containing component's VNode has <span class='important'>updated, __but possibly before its children have updated__</span>. The <span class='important'>directive's value may or may not have changed</span>, but you can skip unnecessary updates by comparing the binding's current and old values (see below on hook arguments).
 
 <p class="tip">We'll cover VNodes in more detail [later](./render-function.html#The-Virtual-DOM), when we discuss [render functions](./render-function.html).</p>
 
@@ -223,7 +223,7 @@ Vue.directive('color-swatch', function (el, binding) {
 
 ## Object Literals
 
-If your directive needs multiple values, you can also pass in a JavaScript object literal. Remember, directives can take any valid JavaScript expression.
+If your directive needs <span class='definition'>multiple values</span>, you can also pass in a JavaScript object literal. Remember, directives can take any valid JavaScript expression.
 
 ``` html
 <div v-demo="{ color: 'white', text: 'hello!' }"></div>
